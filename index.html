@@ -1,0 +1,75 @@
+<html>
+<head>
+  <title>List</title>
+  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,target-densitydpi=device-dpi, user-scalable=no" />
+  <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="js/jquery-1.11.2.min.js"></script>  
+</head>
+<body>
+  <section id="container">
+    <h1>List<input type="text" class="form-control title-editor" placeholder="List"></h1>
+    <div id="tablet">
+      <ul id="list">
+        <li><div class="check"><input type="checkbox" class="item-check"></div><div class="txt"><span>Example item </span><input type="text" class="form-control editor" placeholder="ItemText"></div><div class="rem">X</div></li>
+        <li><div class="check"><input type="checkbox" class="item-check"></div><div class="txt"><span>Example item 2</span><input type="text" class="form-control editor" placeholder="ItemText"></div><div class="rem">X</div></li>
+      </ul>
+      <div class="action">
+        <button id="add"><span>+</span></button>
+      </div>
+    </div>
+  </section>
+  
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+    // Edit item
+    function editItem() {
+      var text = $(this).text();
+      $(this).parent().addClass("edit");          // Add "edit" class to li element
+      $(this).children("input.editor").val(text); // Put current text into input box
+      $(this).children("input.editor").focus();   // Select the input box
+      $(this).children("input.editor").on({
+          keydown: function(e){                   // On keydown,
+            if (e.keyCode == 13) {                // if the enter key was pressed
+              $(this).blur();                     // Deselect input box
+            }
+          },
+          blur: function(){                       // When deselected,
+            var newName = $(this).val();          // save new value
+            $(this).parent().parent().removeClass("edit");
+            $(this).parent().children("span").text(newName);
+          }
+      });
+    }
+    // Remove item
+    function removeItem() {
+      $(this).parent().remove();
+    }
+    // Check item
+    // Applies "checked" class to the parent li element
+    function check() {
+      $(this).parent().parent().toggleClass("checked", this.checked);
+    }
+    // Adds a new item when #add button is clicked
+    $("#add").click(function(){ 
+              // Define new element
+      var $newli = $('<li><div class="check"><input type="checkbox" class="item-check"></div><div class="txt"><span></span><input type="text" class="form-control editor" placeholder="New item"></div><div class="rem">X</div></li>');
+      $("#list").append($newli);  // Append new element to #list
+      $newli.children(".txt").click(); // "Click" the new element to trigger editItem function
+    });
+      
+    // Calls editItem function when #list .txt is clicked
+    $('body').on('click', '#list .txt', editItem); 
+    // Calls removeItem function when #list .rem is clicked   
+    $('body').on('click', '#list .rem', removeItem);
+    // Calls check function when .item-check is clickd  
+    $('body').on('click', '.item-check', check);     
+      
+  });
+  
+  </script>
+  
+  
+</body>
+</html>
