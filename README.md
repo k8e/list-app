@@ -1,5 +1,5 @@
 # List-App
-Hard-coded list maker in the browser. <br />
+Simple jQuery list maker in the browser. <br />
 
 # To Do
 . Add back-end functionality <br />
