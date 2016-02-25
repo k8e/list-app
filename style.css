@@ -5,8 +5,8 @@
 }
 
 body {
-  background-color: #CCCCCC;
-  background: url('bg.png') repeat;
+  background-color: #888888;
+  /*background: url('bg.png') repeat;*/
   color: #444444;
   font-family: "Trebuchet MS","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Tahoma,sans-serif;
 }
