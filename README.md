@@ -1,4 +1,4 @@
-# List-App
+# list-app
 Simple jQuery list maker in the browser. <br />
 
 # To Do
